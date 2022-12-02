@@ -1,0 +1,40 @@
+{% extends 'base.html'%}
+
+{% block head %}
+    <title>To do-list</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align:center ;"> Lista de tareas </h1>
+    {% if task|length < 1 %}
+    <h4 style="text-align:center ;"> No hay datos en esta lista </h4>
+
+    <table>
+        <tr>
+            <th>Tareas</th>
+            <th>Agregadas</th>
+            <th>Opciones</th>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.content }}</td>
+            <td>{{ task.date_created.date }}</td>
+            <td>
+                <a href="/template/delete/{{task.id}}">Eliminar</a>
+                <br>
+                <a href="/template/update/{{task.id}}">Actualizar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <div class="form">
+        <form action="/" method="post">
+            <input type="text" name="content" id="content">
+            <input type="submit" value="Agregar tareas">
+        </form>
+    </div>
+</div>
+{% endblock %}
